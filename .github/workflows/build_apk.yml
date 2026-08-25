@@ -1,0 +1,37 @@
+name: Build NDownloader APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install Python Dependencies
+        run: |
+          pip install flet yt-dlp
+
+      - name: Build Android APK via Flet CLI
+        run: |
+          flet build apk --project-name ndownloader --app-title "NDownloader"
+
+      - name: Upload NDownloader APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: NDownloader-APK
+          path: build/apk/*.apk

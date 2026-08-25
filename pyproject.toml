@@ -1,0 +1,13 @@
+[project]
+name = "ndownloader"
+version = "1.0.0"
+description = "NDownloader - Clean Video & Audio Downloader"
+dependencies = [
+    "flet",
+    "yt-dlp"
+]
+
+[tool.flet]
+app_title = "NDownloader"
+assets_dir = "assets"
+icon = "assets/logo.png"
