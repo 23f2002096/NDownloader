@@ -28,7 +28,7 @@ jobs:
 
       - name: Build Android APK via Flet CLI
         run: |
-          flet build apk --project-name ndownloader --app-title "NDownloader"
+          flet build apk --yes
 
       - name: Upload NDownloader APK
         uses: actions/upload-artifact@v4
