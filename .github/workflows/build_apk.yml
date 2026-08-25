@@ -17,10 +17,20 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Setup Flutter SDK
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+
+      - name: Accept Android Licenses
+        run: |
+          yes | flutter doctor --android-licenses || true
 
       - name: Install Python Dependencies
         run: |
@@ -28,7 +38,7 @@ jobs:
 
       - name: Build Android APK via Flet CLI
         run: |
-          flet build apk --yes
+          flet build apk --yes --module-name main
 
       - name: Upload NDownloader APK
         uses: actions/upload-artifact@v4
